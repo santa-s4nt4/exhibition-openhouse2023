@@ -52,8 +52,8 @@ void setup() {
   Serial.println("WiFi connected");
   Serial.println("IP address: ");
   Serial.println(WiFi.localIP());
-  OscWiFi.subscribe(54414, "/motor_on", i);  // 受信したOSCパケットを直接変数にバインドします
-  OscWiFi.subscribe(54414, "/speed", m_speed);
+  OscWiFi.subscribe(54416, "/motor_on", i);  // 受信したOSCパケットを直接変数にバインドします
+  OscWiFi.subscribe(54416, "/speed", m_speed);
 }
 
 void loop() {
