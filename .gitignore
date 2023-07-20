@@ -1,0 +1,6 @@
+.DS_Store
+*.cfg
+distance_c/debug_custom.json
+*.svd
+motor/debug_custom.json
+distance_cplus/debug_custom.json
