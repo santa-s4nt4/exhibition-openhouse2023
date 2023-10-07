@@ -79,7 +79,7 @@ void loop() {
   if (distance > 20) {
     M5.Lcd.setCursor(20, 35, 4);
     M5.Lcd.printf("%.2fmm", distance);
-    OscWiFi.send("192.168.0.2", 54415, "/distance1", distance);
+    OscWiFi.send("192.168.0.2", 54415, "/d" + ipToString(WiFi.localIP()), distance);
   }
 
   delay(100);

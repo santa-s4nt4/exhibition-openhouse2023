@@ -52,32 +52,26 @@ void setup() {
   Serial.println("WiFi connected");
   Serial.println("IP address: ");
   Serial.println(WiFi.localIP());
-  OscWiFi.subscribe(54414, "/motor_on", i);  // 受信したOSCパケットを直接変数にバインドします
+  OscWiFi.subscribe(54414, "/motor_sw", i);  // 受信したOSCパケットを直接変数にバインドします
   OscWiFi.subscribe(54414, "/speed", m_speed);
 }
 
 void loop() {
   OscWiFi.update();  // 自動的に送受信するために必須
-  int speed;
 
   M5.update();
 
-  delay(100);
-
-  if (M5.BtnA.wasPressed()) {
+  if (M5.Btn.wasPressed()) {
     OscWiFi.send("192.168.0.2", 54415, "/" + ipToString(WiFi.localIP()), 1);
+    OscWiFi.send("192.168.0.2", 54415, "/speed", m_speed);
+    Atom.SetMotorSpeed(1, m_speed);
   }
 
-  if (M5.BtnA.wasReleased()) {
+  if (M5.Btn.wasReleased()) {
     OscWiFi.send("192.168.0.2", 54415, "/" + ipToString(WiFi.localIP()), 0);
-  }
-
-  speed = m_speed;
-
-  if (i == 1) {
-    OscWiFi.send("192.168.0.2", 54415, "/speed_check", speed);
-    Atom.SetMotorSpeed(1, speed);
-  } else {
     Atom.SetMotorSpeed(1, 0);
   }
+
+  delay(100);
+
 }
