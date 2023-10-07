@@ -64,18 +64,17 @@ void loop() {
 
   delay(100);
 
-  if (M5.BtnA.wasPressed()) {
+  if (M5.Btn.wasPressed()) {
     OscWiFi.send("192.168.0.2", 54415, "/" + ipToString(WiFi.localIP()), 1);
   }
 
-  if (M5.BtnA.wasReleased()) {
+  if (M5.Btn.wasReleased()) {
     OscWiFi.send("192.168.0.2", 54415, "/" + ipToString(WiFi.localIP()), 0);
   }
 
   speed = m_speed;
 
   if (i == 1) {
-    OscWiFi.send("192.168.0.2", 54415, "/speed_check", speed);
     Atom.SetMotorSpeed(1, speed);
   } else {
     Atom.SetMotorSpeed(1, 0);
